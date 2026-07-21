@@ -1,0 +1,13 @@
+# Durable domain CI configuration — seeded by Vibe Data Studio.
+# The VD_DOMAIN_* coordinate keys are Studio-owned and CONVERGE on every spawn;
+# the per-platform GHA Variable/Secret name-indirection keys (ADR-0018) are
+# seeded once and preserved thereafter (VD-3364 AC, ADR-0019).
+VD_DOMAIN_DATA_PLATFORM: duckdb
+VD_DOMAIN_SLUG: demoe3r3r3
+VD_DOMAIN_SCHEMA: main
+VD_DOMAIN_DUCKDB_PATH: /Users/vishalh/Desktop/accelerate-data/worktrees/feature/vd-3551-intent-provisioning-progress/data/duckdb/demoe3r3r3.duckdb
+VD_DOMAIN_DUCKDB_DATABASE: demoe3r3r3
+MOTHERDUCK_TOKEN_VAR: MOTHERDUCK_TOKEN
+LLM_API_KEY_VAR: LLM_API_KEY
+LLM_API_URL_VAR: LLM_API_URL
+LLM_MODEL_VAR: LLM_MODEL
