@@ -1,0 +1,11 @@
+sales_mart:
+  outputs:
+    dev:
+      type: duckdb
+      path: ':memory:'
+      threads: 4
+    prod:
+      type: duckdb
+      path: ':memory:'
+      threads: 4
+  target: dev
