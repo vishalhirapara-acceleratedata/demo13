@@ -130,7 +130,10 @@ Columns: `order_id`, `customer_id`, `order_date`, `product`, `quantity`, `price`
 
 ## Approvals
 
-- **Status:** Awaiting user approval before design and implementation.
+- **Approved:** R-01@1, R-02@1, R-03@1, R-04@1
+- **Decision:** User approved sales data mart with four-table design (fct_sales, dim_customer, dim_product, dim_date)
+- **Source:** Direct user approval
+- **UTC timestamp:** 2026-09-21T08:07:00Z
 
 ---
 
