@@ -42,4 +42,4 @@ None — all business branches resolved.
 
 ## Approvals
 
-<!-- append-only; filled in by capturing-requirements after user approval -->
+- 2026-10-13T11:40Z — requirement approved — "approved" — 7b03dd1
