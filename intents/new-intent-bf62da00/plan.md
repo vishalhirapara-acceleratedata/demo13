@@ -3,6 +3,8 @@ kinds: [transformation]
 scope: dbt models for mart_sales_opportunities
 ---
 
+hello
+
 # Plan: Salesforce Sales Datamart — dbt Models
 
 **Goal:** Author, build and test the dbt staging models and `mart_sales_opportunities` gold mart in the sandbox, producing one verified row per Salesforce Opportunity with ARR/Revenue enriched with Account and Owner names.
