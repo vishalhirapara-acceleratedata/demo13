@@ -11,8 +11,8 @@ Build a Salesforce sales datamart pipeline: ingest Opportunity, Account, and Use
 ## Requirements
 
 - [ ] `R-01` Ingest Salesforce **Opportunity**, **Account**, and **User** objects via a dlt pipeline, landing them in the bronze layer of the sandbox — accept when all three tables are present in the sandbox destination, pass Tier-1 bronze checks (non-empty, schema matches declared contract, no null primary keys), and the pipeline audit finds no critical issues — source: user answer
-- [ ] `R-02` Build a mart model `mart_sales_opportunities` at **Opportunity grain** (one row per Opportunity) exposing at minimum: Opportunity ID, Account name, Owner (sales rep) name, stage, close date, created date, and **ARR / Revenue** (`Opportunity.Amount`) — accept when the model builds in the sandbox, grain uniqueness passes (unique + not-null test on Opportunity ID), and `amount` values are non-null and agree with the bronze source to within rounding — source: user answer
-- [ ] `R-03` Schedule the pipeline to run **daily** (once per day) in the ephemeral orchestration layer — accept when a schedule definition is present, configured for daily cadence, and passes a one-shot trial run without error — source: user answer
+- [ ] `R-02` Build a mart model `mart_sales_opportunities` at **Opportunity grain** (one row per Opportunity) exposing at minimum: Opportunity ID, Account name, Owner (sales rep) name, stage, close date, created date, and **ARR / Revenue** (`Opportunity.Amount`) — accept when the model builds in the sandbox, grain uniqueness passes (unique + not-null test on Opportunity ID), and `amount` values agree exactly with the bronze source (NULL-for-NULL, value-for-value) — source: user answer
+- [~] `R-03` ~~Schedule the pipeline to run **daily**~~ — **OMITTED**: DuckDB-local platform has no native orchestration support; schedule definition cannot be created on this platform. Deliberate decision recorded in `docs/design/pipelines/salesforce_pipeline.md` D-06 — source: user answer; design finding
 
 ## Business decisions
 
