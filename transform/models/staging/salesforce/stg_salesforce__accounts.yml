@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_salesforce__accounts
+    description: >
+      One row per active Salesforce Account (IsDeleted = false).
+      Grain: account_id (Salesforce Id). Renames and casts bronze columns;
+      no joins, aggregations or business logic.
+    columns:
+      - name: account_id
+        description: "Salesforce Account Id. Primary key."
+        data_type: varchar
+        tests:
+          - unique
+          - not_null
+
+      - name: account_name
+        description: "Name of the Account."
+        data_type: varchar
+
+      - name: industry
+        description: "Industry classification of the Account."
+        data_type: varchar
+
+      - name: billing_country
+        description: "Billing country of the Account."
+        data_type: varchar
+
+      - name: last_modified_at
+        description: "dlt incremental cursor — last modification timestamp in Salesforce."
+        data_type: timestamp

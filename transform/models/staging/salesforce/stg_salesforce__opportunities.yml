@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_salesforce__opportunities
+    description: >
+      One row per active Salesforce Opportunity (IsDeleted = false).
+      Grain: opportunity_id (Salesforce Id). Renames and casts bronze columns;
+      no joins, aggregations or business logic.
+    columns:
+      - name: opportunity_id
+        description: "Salesforce Opportunity Id. Primary key."
+        data_type: varchar
+        tests:
+          - unique
+          - not_null
+
+      - name: opportunity_name
+        description: "Name of the Opportunity."
+        data_type: varchar
+
+      - name: account_id
+        description: "Foreign key to the associated Account."
+        data_type: varchar
+
+      - name: owner_id
+        description: "Foreign key to the owning User (sales rep)."
+        data_type: varchar
+
+      - name: stage_name
+        description: "Current pipeline stage of the Opportunity."
+        data_type: varchar
+
+      - name: close_date
+        description: "Expected or actual close date. NULL for opportunities without a set close date."
+        data_type: date
+
+      - name: created_at
+        description: "Timestamp when the Opportunity was created in Salesforce."
+        data_type: timestamp
+
+      - name: amount
+        description: "Deal value (ARR/Revenue = Opportunity.Amount). NULL is valid for open deals without a quoted amount."
+        data_type: double
+
+      - name: system_modstamp
+        description: "dlt incremental cursor — last modification timestamp in Salesforce."
+        data_type: timestamp

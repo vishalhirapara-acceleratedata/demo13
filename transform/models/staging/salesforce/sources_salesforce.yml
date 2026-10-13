@@ -1,0 +1,60 @@
+version: 2
+
+sources:
+  - name: salesforce
+    schema: src_salesforce
+    description: "Raw Salesforce data landed by the dlt pipeline into the src_salesforce schema."
+    tables:
+      - name: opportunity
+        description: "Salesforce Opportunity records, incrementally merged on SystemModstamp. Includes soft-deleted records (IsDeleted = true) which must be filtered in staging."
+        columns:
+          - name: Id
+            description: "Salesforce primary key for the Opportunity."
+          - name: Name
+            description: "Opportunity name."
+          - name: AccountId
+            description: "Foreign key to Account."
+          - name: OwnerId
+            description: "Foreign key to User (sales rep)."
+          - name: StageName
+            description: "Current pipeline stage."
+          - name: CloseDate
+            description: "Expected or actual close date."
+          - name: CreatedDate
+            description: "Timestamp when the Opportunity was created."
+          - name: Amount
+            description: "Deal value (ARR/Revenue). NULL for open deals without a quoted amount."
+          - name: IsDeleted
+            description: "Salesforce soft-delete flag. True for records in the recycle bin."
+          - name: SystemModstamp
+            description: "dlt incremental cursor for opportunity."
+
+      - name: account
+        description: "Salesforce Account records, incrementally merged on LastModifiedDate. Includes soft-deleted records."
+        columns:
+          - name: Id
+            description: "Salesforce primary key for the Account."
+          - name: Name
+            description: "Account name."
+          - name: Industry
+            description: "Industry classification."
+          - name: BillingCountry
+            description: "Billing country."
+          - name: IsDeleted
+            description: "Salesforce soft-delete flag."
+          - name: LastModifiedDate
+            description: "dlt incremental cursor for account."
+
+      - name: sf_user
+        description: "Salesforce User records. Full-replace on every pipeline run — deleted users are absent after each load."
+        columns:
+          - name: Id
+            description: "Salesforce primary key for the User."
+          - name: Name
+            description: "Full name of the user."
+          - name: Email
+            description: "User email address."
+          - name: IsActive
+            description: "Whether the user is active."
+          - name: UserType
+            description: "Type of Salesforce user."

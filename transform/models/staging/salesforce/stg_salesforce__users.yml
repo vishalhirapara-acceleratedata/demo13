@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_salesforce__users
+    description: >
+      One row per Salesforce User. Grain: user_id (Salesforce Id).
+      Full-replace on every pipeline run — deleted users are absent from the
+      source after each load so no IsDeleted filter is needed.
+    columns:
+      - name: user_id
+        description: "Salesforce User Id. Primary key."
+        data_type: varchar
+        tests:
+          - unique
+          - not_null
+
+      - name: user_name
+        description: "Full name of the Salesforce user."
+        data_type: varchar
+
+      - name: email
+        description: "Email address of the user."
+        data_type: varchar
+
+      - name: is_active
+        description: "Whether the user account is currently active."
+        data_type: boolean
+
+      - name: user_type
+        description: "Type of Salesforce user (e.g. Standard, Guest)."
+        data_type: varchar

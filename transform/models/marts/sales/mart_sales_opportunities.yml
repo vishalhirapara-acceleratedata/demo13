@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: mart_sales_opportunities
+    description: >
+      One row per Salesforce Opportunity. Grain: opportunity_id (Salesforce Id).
+      ARR/Revenue = amount (Opportunity.Amount); NULL preserved for open deals
+      without a quoted amount. Unmatched account or owner resolves to 'Unknown'.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: opportunity_id
+        description: "Salesforce Opportunity Id. Primary key."
+        data_type: varchar
+        tests:
+          - unique
+          - not_null
+
+      - name: opportunity_name
+        description: "Name of the Opportunity."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: account_id
+        description: "Salesforce Account Id foreign key."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: account_name
+        description: "Account name. 'Unknown' when the account_id has no matching Account record."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: owner_id
+        description: "Salesforce User Id of the opportunity owner (sales rep)."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: owner_name
+        description: "Full name of the opportunity owner. 'Unknown' when owner_id has no matching User record."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: stage_name
+        description: "Current pipeline stage of the Opportunity."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: close_date
+        description: "Expected or actual close date. NULL when not set on the Opportunity."
+        data_type: date
+
+      - name: created_at
+        description: "Timestamp when the Opportunity was created in Salesforce."
+        data_type: timestamp
+        tests:
+          - not_null
+
+      - name: amount
+        description: >
+          Deal value (ARR/Revenue = Opportunity.Amount).
+          NULL is valid for open deals without a quoted amount — no not_null test applied.
+        data_type: double
